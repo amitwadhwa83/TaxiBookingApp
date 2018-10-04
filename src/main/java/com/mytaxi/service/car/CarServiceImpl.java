@@ -86,10 +86,10 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public CarDO updateCar(Long carId, Integer rating) throws InvalidCarRatingException, EntityNotFoundException {
+	CarDO car = findCarChecked(carId);
 	if (!range.isValidValue(rating)) {
 	    throw new InvalidCarRatingException(rating.toString());
 	}
-	CarDO car = findCarChecked(carId);
 	car.setDateUpdated(ZonedDateTime.now());
 	car.setRating(rating);
 	return car;

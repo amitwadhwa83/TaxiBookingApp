@@ -28,11 +28,11 @@ public class DriverSearchController {
     }
 
     @GetMapping
-    public List<DriverDTO> findDrivers(@RequestParam(required = false) String username,
+    public List<DriverDTO> searchDrivers(@RequestParam(required = false) String username,
 	    @RequestParam(required = false) OnlineStatus onlineStatus,
 	    @RequestParam(required = false) String licensePlate, @RequestParam(required = false) Integer rating) {
 
 	return DriverMapper
-		.makeDriverDTOList(driverSearchService.findDrivers(username, onlineStatus, licensePlate, rating));
+		.makeDriverDTOList(driverSearchService.searchDrivers(username, onlineStatus, licensePlate, rating));
     }
 }

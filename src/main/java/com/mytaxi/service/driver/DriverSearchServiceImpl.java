@@ -30,7 +30,7 @@ public class DriverSearchServiceImpl implements DriverSearchService {
     }
 
     @Override
-    public List<DriverDO> findDrivers(String username, OnlineStatus onlineStatus, String licensePlate, Integer rating) {
+    public List<DriverDO> searchDrivers(String username, OnlineStatus onlineStatus, String licensePlate, Integer rating) {
 
 	return driverRepository
 		.findAll(DriverSpecifications.withDynamicQuery(username, onlineStatus, licensePlate, rating));

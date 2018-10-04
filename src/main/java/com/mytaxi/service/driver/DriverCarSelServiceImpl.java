@@ -78,11 +78,8 @@ public class DriverCarSelServiceImpl implements DriverCarSelService {
 		throw new CarAlreadyInUseException(carId.toString());
 	    }
 
-	    // De-select old car if any
-	    Optional.ofNullable(driver.getCar()).ifPresent(currentCar -> {
-		currentCar.setSelected(false);
-		carRepository.save(currentCar);
-	    });
+	    // De-select car if any assigned
+	    deselectCar(driver);
 
 	    // Select the car
 	    car.setSelected(true);
@@ -110,15 +107,18 @@ public class DriverCarSelServiceImpl implements DriverCarSelService {
 	DriverDO driver = findDriverChecked(driverId);
 
 	// De-select car if any assigned
-	Optional.ofNullable(driver.getCar()).ifPresent(c -> {
-	    c.setSelected(false);
-	    uncacheCar(carRepository.save(c));
-	});
-
+	deselectCar(driver);
 	driver.setCar(null);
 	driverRepository.save(driver);
 
 	return driver;
+    }
+
+    private void deselectCar(DriverDO driver) {
+	Optional.ofNullable(driver.getCar()).ifPresent(currentCar -> {
+	    currentCar.setSelected(false);
+	    uncacheCar(carRepository.save(currentCar));
+	});
     }
 
     private DriverDO findDriverChecked(Long driverId) throws EntityNotFoundException {

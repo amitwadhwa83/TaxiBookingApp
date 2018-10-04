@@ -42,7 +42,7 @@ public class DriverSearchServiceImplTest {
     ArgumentCaptor<Specification<DriverDO>> argCaptor;
 
     @Test
-    public final void testFindDrivers() {
+    public final void testSearchDrivers() {
 	// GIVEN
 	String username = randomAlphanumeric(5);
 	OnlineStatus onlineStatus = OnlineStatus.OFFLINE;
@@ -53,7 +53,7 @@ public class DriverSearchServiceImplTest {
 	when(driverRepository.findAll(any())).thenReturn(listDriverDO);
 
 	// WHEN
-	List<DriverDO> response = service.findDrivers(username, onlineStatus, licensePlate, rating);
+	List<DriverDO> response = service.searchDrivers(username, onlineStatus, licensePlate, rating);
 
 	// THEN
 	// Expected invocations

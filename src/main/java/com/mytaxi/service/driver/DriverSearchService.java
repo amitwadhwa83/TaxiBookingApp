@@ -7,5 +7,5 @@ import com.mytaxi.domainvalue.OnlineStatus;
 
 public interface DriverSearchService {
 
-    List<DriverDO> findDrivers(String username, OnlineStatus onlineStatus, String licensePlate, Integer rating);
+    List<DriverDO> searchDrivers(String username, OnlineStatus onlineStatus, String licensePlate, Integer rating);
 }

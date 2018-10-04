@@ -104,10 +104,12 @@ public class DriverCarSelServiceImplTest {
 	DriverDO driver = aDriverDO();
 	CarDO oldCar = driver.getCar();
 	when(driverRepository.findDriverChecked(any(Long.class))).thenReturn(driver);
+	when(carRepository.save(oldCar)).thenReturn(oldCar);
 
 	CarDO newCar = aCarDO();
 	newCar.setSelected(false);
 	when(carRepository.findCarChecked(any(Long.class))).thenReturn(newCar);
+	
 
 	Long driverId = random.nextLong();
 	Long carId = random.nextLong();
